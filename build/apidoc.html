@@ -51,7 +51,7 @@
 
         href="https://github.com/rquadling/bower-installer#readme"
 
-    >bower-installer (v1.3.5)</a>
+    >bower-installer (v1.3.6)</a>
 </h1>
 <h4>Tool for installing bower dependencies that won't include entire repos</h4>
 <div class="apidocSectionDiv"><a
@@ -230,12 +230,39 @@
   // Install each dependency
   async.each(deps, function (dep, callback) {
 
+    var src, dest;
+
     // If the file is an object, it is for mapping (renaming) the source
     // file to a new filename in the destination. Because of this, it
     // does not make sense to do a file glob, just immediately install
     // the file
     if (_.isObject(dep)) {
-      installFile(dep, pakcfg, paths, dep, silent, options, callback);
+
+      // dep is in the form { src : dest }. extrac the key and value.
+      for (var dep_key in dep) {
+        src = dep_key;
+        dest = dep[src];
+      }
+
+      // is the input path a glob?
+      if (/\*\*/.test(src)) {
+
+        glob(src, function (err, files) {
+          if (err) {
+            if (!silent) {
+              console.log((&#x27;Error globbing \t&#x27; + key + &#x27; : &#x27; + src).red);
+              console.log((&#x27;\t\t&#x27; + err).red);
+            }
+          } else {
+            async.each(files, function (f, callback) {
+              installFile(f, pakcfg, paths, src, dest, silent, options, callback);
+            }, callback);
+          }
+        });
+
+      } else {
+        installFile(dep, pakcfg, paths, dep, &#x27;&#x27;, silent, options, callback);
+      }
     } else {
       glob(dep, function (err, files) {
         if (err) {
@@ -245,7 +272,7 @@
           }
         } else {
           async.each(files, function (f, callback) {
-            installFile(f, pakcfg, paths, dep, silent, options, callback);
+            installFile(f, pakcfg, paths, dep, &#x27;&#x27;, silent, options, callback);
           }, callback);
         }
       });
@@ -417,13 +444,14 @@ _.each(installPathFiles, function (file) {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-    path = utils.parsePath(paths.all, pakcfg) + pathSep + key + subDir;
+    path = utils.parsePath(paths.all, pakcfg) + (options.includePackageNameInInstallPath ? pathSep + key : &#x27;&#x27;) + subDir
+;
 
   } else {
     // Determine the path by regular expression...
     path = utils.getPathByRegExp(f_name, paths)
 // ...or by file extension.
-|| paths[utils.<span class="apidocCodeKeywordSpan">getExtension</span>(f_name)]
+|| paths[utils.<span class="apidocCodeKeywordSpan">getExtension</span>(f_name)];
 
     if (path &#x26;&#x26; typeof path !== &#x27;undefined&#x27;) {
 
@@ -514,13 +542,14 @@ if (cfg &#x26;&#x26; (!cfg.ignore || (cfg.ignore &#x26;&#x26; !_.includes(cfg.ig
   // If the configured paths is a map, use the path for the given file extension
   if (paths.all) {
 
-    path = utils.parsePath(paths.all, pakcfg) + pathSep + key + subDir;
+    path = utils.parsePath(paths.all, pakcfg) + (options.includePackageNameInInstallPath ? pathSep + key : &#x27;&#x27;) + subDir
+;
 
   } else {
     // Determine the path by regular expression...
     path = utils.<span class="apidocCodeKeywordSpan">getPathByRegExp</span>(f_name, paths)
 // ...or by file extension.
-|| paths[utils.getExtension(f_name)]
+|| paths[utils.getExtension(f_name)];
 
     if (path &#x26;&#x26; typeof path !== &#x27;undefined&#x27;) {
 
@@ -586,20 +615,21 @@ if (!fs.existsSync(file)) {
   return path;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    subDir = (f_name_helper[1] != &#x27;&#x27;) ? pathLib.dirname(f_name_helper[1]) : f_name_helper[1];
-  }
+if (infixDir != &#x27;&#x27;) {
+  subDir = pathSep + infixDir + subDir;
 }
 
 // If the configured paths is a map, use the path for the given file extension
 if (paths.all) {
 
-  path = utils.<span class="apidocCodeKeywordSpan">parsePath</span>(paths.all, pakcfg) + pathSep + key + subDir;
+  path = utils.<span class="apidocCodeKeywordSpan">parsePath</span>(paths.all, pakcfg) + (options.includePackageNameInInstallPath
+ ? pathSep + key : &#x27;&#x27;) + subDir;
 
 } else {
   // Determine the path by regular expression...
   path = utils.getPathByRegExp(f_name, paths)
     // ...or by file extension.
-    || paths[utils.getExtension(f_name)]
+    || paths[utils.getExtension(f_name)];
 ...</pre></li>
     </ul>
 
