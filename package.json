@@ -1,7 +1,7 @@
 {
     "author": "kai zhu <kaizhu256@gmail.com>",
     "buildNpmdoc": "bower-installer",
-    "description": "api documentation for [bower-installer (v1.3.5)](https://github.com/rquadling/bower-installer#readme) [![npm package](https://img.shields.io/npm/v/npmdoc-bower-installer.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-bower-installer) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-bower-installer.svg)](https://travis-ci.org/npmdoc/node-npmdoc-bower-installer)",
+    "description": "#### basic api documentation for  [bower-installer (v1.3.6)](https://github.com/rquadling/bower-installer#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-bower-installer.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-bower-installer) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-bower-installer.svg)](https://travis-ci.org/npmdoc/node-npmdoc-bower-installer)",
     "devDependencies": {
         "bower-installer": "*",
         "electron-lite": "kaizhu256/node-electron-lite#alpha",

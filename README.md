@@ -1,4 +1,7 @@
-# api documentation for  [bower-installer (v1.3.5)](https://github.com/rquadling/bower-installer#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-bower-installer.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-bower-installer) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-bower-installer.svg)](https://travis-ci.org/npmdoc/node-npmdoc-bower-installer)
+# npmdoc-bower-installer
+
+#### basic api documentation for  [bower-installer (v1.3.6)](https://github.com/rquadling/bower-installer#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-bower-installer.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-bower-installer) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-bower-installer.svg)](https://travis-ci.org/npmdoc/node-npmdoc-bower-installer)
+
 #### Tool for installing bower dependencies that won't include entire repos
 
 [![NPM](https://nodei.co/npm/bower-installer.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/bower-installer)
@@ -51,13 +54,13 @@
         "test": "test"
     },
     "dist": {
-        "shasum": "2e43d126feb77621dc8822499c2b23bf6ee76f93",
-        "tarball": "https://registry.npmjs.org/bower-installer/-/bower-installer-1.3.5.tgz"
+        "shasum": "cf7839b65421d2b270ab22c74fc858a55e3a1370",
+        "tarball": "https://registry.npmjs.org/bower-installer/-/bower-installer-1.3.6.tgz"
     },
     "engines": {
         "node": ">=0.10.0"
     },
-    "gitHead": "61708248944b44b461104f2afdf6665bd7cdd02a",
+    "gitHead": "bb89b88e7ac75ac48e2d8d5335151ba3df7d457e",
     "homepage": "https://github.com/rquadling/bower-installer#readme",
     "keywords": [
         "bower",
@@ -84,7 +87,7 @@
     "scripts": {
         "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.config.json"
     },
-    "version": "1.3.5"
+    "version": "1.3.6"
 }
 ```
 
